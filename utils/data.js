@@ -1,8 +1,8 @@
 const data = {
   products: [
     {
-      name: " Shirt",
-      slug: "shirt",
+      name: "Shirt",
+      slug: "fshirt",
       category: "Shirts",
       image: "/images/shirt1.jpg",
       price: 70,
