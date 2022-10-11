@@ -63,11 +63,11 @@ function Layout({ title, children }) {
                       {session.user.name}
                     </Menu.Button>
                     <Menu.Items className="absolute right-0 w-56 origin-top-right bg-white  shadow-lg ">
-                      <Menu.Item>
+                      {/* <Menu.Item>
                         <DropdownLink className="dropdown-link" href="/profile">
                           Profile
                         </DropdownLink>
-                      </Menu.Item>
+                      </Menu.Item> */}
                       <Menu.Item>
                         <DropdownLink
                           className="dropdown-link"

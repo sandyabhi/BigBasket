@@ -1,9 +1,11 @@
+// import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useReducer } from "react";
 import Layout from "../../components/Layout";
+// import { toast } from "react-toastify";
 import { getError } from "../../utils/error";
 
 function reducer(state, action) {
@@ -14,12 +16,22 @@ function reducer(state, action) {
       return { ...state, loading: false, order: action.payload, error: "" };
     case "FETCH_FAIL":
       return { ...state, loading: false, error: action.payload };
+    // case "PAY_REQUEST":
+    //   return { ...state, loadingPay: true };
+    // case "PAY_SUCCESS":
+    //   return { ...state, loadingPay: false, successPay: true };
+    // case "PAY_FAIL":
+    //   return { ...state, loadingPay: false, errorPay: action.payload };
+    // case "PAY_RESET":
+    //   return { ...state, loadingPay: false, successPay: false, errorPay: "" };
     default:
       state;
   }
 }
 
 function OrderScreen() {
+  // const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
+
   const { query } = useRouter();
   const orderId = query.id;
 
@@ -41,6 +53,24 @@ function OrderScreen() {
     };
     if (!order._id || (order._id && order._id !== orderId)) {
       fetchOrder();
+      // if (successPay) {
+      //   dispatch({
+      //     type: "PAY_RESET",
+      //   });
+      // }
+      // } else {
+      //   const loadPaypalScript = async () => {
+      //     const { data: clientId } = await axios.get("/api/keys/paypal");
+      //     paypalDispatch({
+      //       type: "resetOptions",
+      //       value: {
+      //         "client-id": clientId,
+      //         currency: "USD",
+      //       },
+      //     });
+      //     paypalDispatch({ type: "setLoadingStatus", value: "pending" });
+      //   };
+      //   loadPaypalScript();
     }
   }, [order, orderId]);
 
@@ -159,6 +189,15 @@ function OrderScreen() {
                     <div>${totalPrice}</div>
                   </div>
                 </li>
+                {!isPaid && (
+                  <li>
+                    <div className="w-full">
+                      <button className="primary-button w-full">
+                        Payment Method (Not Working Currently)
+                      </button>
+                    </div>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
